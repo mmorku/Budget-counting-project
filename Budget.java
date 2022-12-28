@@ -10,6 +10,8 @@ public class Budget {
     private int sumOfIncomeList = 0;
     private int sumOfExpensesList = 0;
 
+    
+
     public void addIncomeToList(FullIncomeList fullIncomeList) {
         if (sumOfIncomeList == income.length) {
             throw new ArrayIndexOutOfBoundsException("Pajamų sąrašas pilnas, pašalinkite dalį sąrašo ir kartokite iš naujo.");
@@ -34,9 +36,9 @@ public class Budget {
         }
         for (FullIncomeList FullIncomeList : income) {
             if (FullIncomeList != null) {
-                System.out.printf("Pajamų sąrašas: %s \n", income);
+//                System.out.printf("Pajamų sąrašas: %s \n", income);
                 sumOfIncome += FullIncomeList.getTotalSum();
-                System.out.printf("Pajamų sąrašo suma: %s \n", sumOfIncome);
+                System.out.printf("Pajamų suma. VISO: %s Eur \n", sumOfIncome);
             }
         }
     }
@@ -47,9 +49,9 @@ public class Budget {
         }
         for (FullExpensesList FullExpensesList : expenses) {
             if (FullExpensesList != null) {
-                System.out.printf("Išlaidų sąrašas: %s \n", expenses);
+//                System.out.printf("Išlaidų sąrašas: %s \n", expenses);
                 sumOfExpenses += FullExpensesList.getTotalSum();
-                System.out.printf("Išlaidų sąrašo suma: %s \n", sumOfExpenses);
+                System.out.printf("Išlaidų suma. VISO: %s Eur\n", sumOfExpenses);
             }
         }
     }
