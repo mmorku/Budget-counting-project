@@ -1,13 +1,14 @@
 public class Expense {
 
-    private static int id;
+    private int id;
     private int totalSum;
     private String dateAndTime;
     private String category;
     private String paymentType;
     private String additionalInfo;
 
-    public Expense(int totalSum, String dateAndTime, String category, String paymentType, String additionalInfo) {
+    public Expense(int id, int totalSum, String dateAndTime, String category, String paymentType, String additionalInfo) {
+        this.id = id;
         this.totalSum = totalSum;
         this.dateAndTime = dateAndTime;
         this.category = category;
@@ -15,7 +16,7 @@ public class Expense {
         this.additionalInfo = additionalInfo;
     }
 
-    public static int getId() {
+    public int getId() {
         return id;
     }
 
@@ -57,5 +58,17 @@ public class Expense {
 
     public void setAdditionalInfo(String additionalInfo) {
         this.additionalInfo = additionalInfo;
+    }
+
+    @Override
+    public String toString() {
+        return "Expense{" +
+                ", id=" + id +
+                ", totalSum=" + totalSum +
+                ", dateAndTime='" + dateAndTime + '\'' +
+                ", category='" + category + '\'' +
+                ", paymentType='" + paymentType + '\'' +
+                ", additionalInfo='" + additionalInfo + '\'' +
+                '}';
     }
 }

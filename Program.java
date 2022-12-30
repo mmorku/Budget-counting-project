@@ -1,6 +1,3 @@
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class Program {
@@ -19,9 +16,13 @@ public class Program {
                 case "2" -> {
                     enterTheExpenses(scanner, budget);
                 }
-                case "+" -> budget.getFullIncomeList();
-                case "-" -> budget.getFullExpensesList();
-                case "3" -> budget.getBalance();
+                case "10" -> budget.printIncomes();
+                case "20" -> budget.printExpenses();
+                case "+" -> budget.getSumOfAllIncomes();
+                case "-" -> budget.getSumOfAllExpenses();
+                case "3" -> budget.getTotalBalance();
+                case "de" -> enterTheId(scanner, budget);
+                case "di" -> enterTheId2(scanner, budget);
                 case "x" -> runprogram = false;
                 default -> System.out.println("Nežinoma komanda");
             }
@@ -35,9 +36,15 @@ public class Program {
                 Pasirinkite:
                 [1] - Įvesti pajamas;
                 [2] - Įvesti išlaidas;
-                [+] - Rodyti visas gautas pajamas;
-                [-] - Rodyti visas išlaidas;
                 [3] - Rodyti bendrą balansą;
+                [+] - Rodyti gautų pajamų sumą;
+                [-] - Rodyti visų išlaidų sumą;
+                
+                [10] - Atspausdinti pajamų sąrašą;
+                [20] - Atspausdinti išlaidų sąrašą;
+                
+                [de] - Ištrinti išlaidų įrašą;
+                [di] - Ištrinti pajamų įrašą;
                 [x] - Baigti;
                 """);
     }
@@ -62,8 +69,8 @@ public class Program {
 //        budget.addIncomeToList(new Income(totalSum, dateInput, category, paymentType, additionalInfo));
 
 
-        budget.addIncomeToList(new Income(50000, "2022-01-01", "nAn", "gryni", "no"));
-        budget.addIncomeToList(new Income(100, "2022-01-01", "nAn", "gryni", "no"));
+        budget.addIncomeToList(new Income(Counter.getNextIncomeCounterId(),50000, "2022-01-01", "nAn", "gryni", "no"));
+        budget.addIncomeToList(new Income(Counter.getNextIncomeCounterId(), 100, "2022-01-01", "nAn", "gryni", "no"));
     }
 
     private static void enterTheExpenses(Scanner scanner, Budget budget) {
@@ -86,7 +93,18 @@ public class Program {
 
 //        budget.addExpensesToList(new Expense(totalSum, dateAndTime, category, paymentType, additionalInfo));
 
-        budget.addExpensesToList(new Expense(50, "2022-01-01 12:00", "nAn", "gryni", "no"));
-        budget.addExpensesToList(new Expense(30, "2022-01-01 12:00", "nAn", "gryni", "no"));
+        budget.addExpensesToList(new Expense(Counter.getNextExpensesCounterId(), 50, "2022-01-01 12:00", "nAn", "gryni", "no"));
+        budget.addExpensesToList(new Expense(Counter.getNextExpensesCounterId(),30, "2022-01-01 12:00", "nAn", "gryni", "no"));
+    }
+
+    private static void enterTheId(Scanner scanner, Budget budget) {
+        System.out.println("Įveskite id: ");
+        int id = Integer.parseInt(scanner.nextLine());
+        budget.deleteExpense(id);
+    }
+    private static void enterTheId2(Scanner scanner, Budget budget) {
+        System.out.println("Įveskite id: ");
+        int id = Integer.parseInt(scanner.nextLine());
+        budget.deleteIncome(id);
     }
 }
