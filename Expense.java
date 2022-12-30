@@ -1,16 +1,22 @@
-public class FullExpensesList {
+public class Expense {
+
+    private static int id;
     private int totalSum;
     private String dateAndTime;
     private String category;
     private String paymentType;
     private String additionalInfo;
 
-    public FullExpensesList(int totalSum, String dateAndTime, String category, String paymentType, String additionalInfo) {
+    public Expense(int totalSum, String dateAndTime, String category, String paymentType, String additionalInfo) {
         this.totalSum = totalSum;
         this.dateAndTime = dateAndTime;
         this.category = category;
         this.paymentType = paymentType;
         this.additionalInfo = additionalInfo;
+    }
+
+    public static int getId() {
+        return id;
     }
 
     public int getTotalSum() {

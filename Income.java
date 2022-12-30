@@ -1,16 +1,22 @@
-public class FullIncomeList {
+public class Income {
+
+    private static int id;
     private int totalSum;
     private String date;
     private String category;
     private String paymentType;
     private String additionalInfo;
 
-    public FullIncomeList(int totalSum, String date, String category, String paymentType, String additionalInfo) {
+    public Income(int totalSum, String date, String category, String paymentType, String additionalInfo) {
         this.totalSum = totalSum;
         this.date = date;
         this.category = category;
         this.paymentType = paymentType;
         this.additionalInfo = additionalInfo;
+    }
+
+    public static int getId() {
+        return id;
     }
 
     public int getTotalSum() {
