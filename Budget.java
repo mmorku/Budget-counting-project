@@ -58,7 +58,7 @@ public class Budget {
         for (Expense expense : expenses) {
             String formattedExpense = String.format(
                     "ID: %1$d, TotalSum: %2$d, Date and Time: %3$s, Category: %4$s, Payment type: %5$s, Additional info: %6$s \n",
-                    expense.getId(), expense.getTotalSum(), expense.getDateAndTime(), expense.getCategory(), expense.getPaymentType(), expense.getAdditionalInfo());
+                    expense.getId(), expense.getTotalSum(), expense.getDate(), expense.getExpenseCategory(), expense.getExpensePaymentType(), expense.getAdditionalInfo());
             System.out.printf(formattedExpense);
         }
     }
@@ -78,12 +78,6 @@ public class Budget {
                 .stream()
                 .filter(expense -> expense.getId() == id).findAny().orElse(null);
         expenses.remove(filteredExpense);
-
-//        ateitis:
-//        expenses.remove(filteredExpense);
-//        filteredExpense.setTotalSum(200);
-//        expenses.add(filteredExpense);
-
     }
 
     public void deleteIncome(int id) {
@@ -93,5 +87,20 @@ public class Budget {
         incomes.remove(filteredIncome);
     }
 
+    public void editExpensesListItem (int id, int id2) {
+        Expense filteredExpense = expenses
+                .stream()
+                .filter(expense -> expense.getId() == id).findAny().orElse(null);
+        filteredExpense.setTotalSum(id2);
+        printExpenses();
+    }
+
+    public void editIncomesListItem (int id, int id2) {
+        Income filteredIncome = incomes
+                .stream()
+                .filter(income -> income.getId() == id).findAny().orElse(null);
+        filteredIncome.setTotalSum(id2);
+        printIncomes();
+    }
 
 }

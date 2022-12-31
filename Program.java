@@ -10,11 +10,8 @@ public class Program {
             printPossibleOptions();
             String input = scanner.nextLine();
             switch (input) {
-                case "1" -> {
-                    enterTheIncome(scanner, budget);
-                }
-                case "2" -> {
-                    enterTheExpenses(scanner, budget);
+                case "0" -> {
+                    addSomethingToList(scanner, budget);
                 }
                 case "10" -> budget.printIncomes();
                 case "20" -> budget.printExpenses();
@@ -23,6 +20,7 @@ public class Program {
                 case "3" -> budget.getTotalBalance();
                 case "de" -> enterTheId(scanner, budget);
                 case "di" -> enterTheId2(scanner, budget);
+                case "edit" -> editSomethingInTheList(scanner, budget);
                 case "x" -> runprogram = false;
                 default -> System.out.println("Nežinoma komanda");
             }
@@ -34,25 +32,50 @@ public class Program {
     private static void printPossibleOptions() {
         System.out.println("""
                 Pasirinkite:
-                [1] - Įvesti pajamas;
-                [2] - Įvesti išlaidas;
+                [0] - Įvesti biudzeto duomenis;
                 [3] - Rodyti bendrą balansą;
                 [+] - Rodyti gautų pajamų sumą;
                 [-] - Rodyti visų išlaidų sumą;
-                
+                                
                 [10] - Atspausdinti pajamų sąrašą;
                 [20] - Atspausdinti išlaidų sąrašą;
-                
+                                
                 [de] - Ištrinti išlaidų įrašą;
                 [di] - Ištrinti pajamų įrašą;
+                [edit] - Redaguoti įrašą;
                 [x] - Baigti;
                 """);
     }
 
-    private static void enterTheIncome(Scanner scanner, Budget budget) {
-//        System.out.println("Įveskite pajamų kiekį: ");
+    private static void enterTheId(Scanner scanner, Budget budget) {
+        System.out.println("Įveskite id: ");
+        int id = Integer.parseInt(scanner.nextLine());
+        budget.deleteExpense(id);
+    }
+
+    private static void enterTheId2(Scanner scanner, Budget budget) {
+        System.out.println("Įveskite id: ");
+        int id = Integer.parseInt(scanner.nextLine());
+        budget.deleteIncome(id);
+    }
+
+    public static void addSomethingToList(Scanner scanner, Budget budget) {
+        System.out.println("""
+                Pasirinkite:
+                [1] - Įvesti pajamas;
+                [2] - Įvesti išlaidas;
+                """);
+        int id = Integer.parseInt(scanner.nextLine());
+        if (id == 1) {
+//            Program.enterTheIncome(scanner, budget);
+
+
+//            System.out.println("Įveskite pajamų kiekį: ");
 //        int totalSum = Integer.parseInt(scanner.nextLine());
 //
+//        System.out.println("Įveskite papildoma info: ");
+//        String additionalInfo = String.format(scanner.nextLine());
+
 //        System.out.println("Įveskite pajamų gavimo datą, formatu (yyyy-MM-dd): ");
 //        String dateInput = scanner.nextLine();
 //        LocalDate localDate = LocalDate.parse(dateInput, DateTimeFormatter.ISO_LOCAL_DATE);
@@ -60,24 +83,22 @@ public class Program {
 //        System.out.println("Įveskite kategorija: ");
 //        String category = String.format(scanner.nextLine());
 //
-//        System.out.println("Įveskite kur gavote pajamas:  i banka pavedimu, ar ne ");
+//        System.out.println("Įveskite mokejimo tipa:  pavedimu / grynaisiais");
 //        String paymentType = String.format(scanner.nextLine());
+//
+//        budget.addIncomeToList(new Income(totalSum, additionalInfo, dateInput, category, paymentType));
+
+
+            budget.addIncomeToList(new Income(Counter.getNextIncomeCounterId(), 50000, "no", "2022-01-01", "gryni", "no"));
+            budget.addIncomeToList(new Income(Counter.getNextIncomeCounterId(), 100, "no", "2022-01-01", "gryni", "no"));
+        } else if (id == 2) {
+//            System.out.println("Įveskite išlaidų kiekį: ");
+//        Integer totalSum = Integer.parseInt(scanner.nextLine());
 //
 //        System.out.println("Įveskite papildoma info: ");
 //        String additionalInfo = String.format(scanner.nextLine());
-//
-//        budget.addIncomeToList(new Income(totalSum, dateInput, category, paymentType, additionalInfo));
 
-
-        budget.addIncomeToList(new Income(Counter.getNextIncomeCounterId(),50000, "2022-01-01", "nAn", "gryni", "no"));
-        budget.addIncomeToList(new Income(Counter.getNextIncomeCounterId(), 100, "2022-01-01", "nAn", "gryni", "no"));
-    }
-
-    private static void enterTheExpenses(Scanner scanner, Budget budget) {
-//        System.out.println("Įveskite išlaidų kiekį: ");
-//        Integer totalSum = Integer.parseInt(scanner.nextLine());
-//
-//        System.out.println("Įveskite išlaidų gavimo datą ir laiką, formatu (yyyy-MM-dd  HH:mm): ");
+//        System.out.println("Įveskite išlaidų gavimo datą ir laiką, formatu (yyyy-MM-dd HH:mm): ");
 //        String dateAndTime = scanner.nextLine();
 //        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 //        LocalDateTime LocalDateTime = java.time.LocalDateTime.parse(dateAndTime, formatter);
@@ -87,24 +108,42 @@ public class Program {
 //
 //        System.out.println("Įveskite koks buvo atsiskaitymo budas:  Kortele, ar grynaisiais");
 //        String paymentType = String.format(scanner.nextLine());
-//
-//        System.out.println("Įveskite papildoma info: ");
-//        String additionalInfo = String.format(scanner.nextLine());
 
 //        budget.addExpensesToList(new Expense(totalSum, dateAndTime, category, paymentType, additionalInfo));
 
-        budget.addExpensesToList(new Expense(Counter.getNextExpensesCounterId(), 50, "2022-01-01 12:00", "nAn", "gryni", "no"));
-        budget.addExpensesToList(new Expense(Counter.getNextExpensesCounterId(),30, "2022-01-01 12:00", "nAn", "gryni", "no"));
+            budget.addExpensesToList(new Expense(Counter.getNextExpensesCounterId(), 50, "nAn", "2022-01-01 12:00", "gryni", "no"));
+            budget.addExpensesToList(new Expense(Counter.getNextExpensesCounterId(), 30, "nAn", "2022-01-01 12:00", "gryni", "no"));
+
+
+//            enterTheExpenses(scanner, budget);
+        } else System.out.println("Nežinoma komanda");
     }
 
-    private static void enterTheId(Scanner scanner, Budget budget) {
-        System.out.println("Įveskite id: ");
-        int id = Integer.parseInt(scanner.nextLine());
-        budget.deleteExpense(id);
-    }
-    private static void enterTheId2(Scanner scanner, Budget budget) {
-        System.out.println("Įveskite id: ");
-        int id = Integer.parseInt(scanner.nextLine());
-        budget.deleteIncome(id);
+    public static void editSomethingInTheList(Scanner scanner, Budget budget) {
+        System.out.println("""
+                Pasirinkite:
+                [00] - Redaguoti pajamas;
+                [11] - Redaguoti išlaidas;
+                """);
+        int editOption = Integer.parseInt(scanner.nextLine());
+        if (editOption == 00) {
+            budget.printIncomes();
+            System.out.println("Įveskite id: ");
+            int id = Integer.parseInt(scanner.nextLine());
+            System.out.println("Įveskite nauja suma: ");
+            int id2 = Integer.parseInt(scanner.nextLine());
+
+            budget.editIncomesListItem(id, id2);
+
+        } else if (editOption == 11) {
+            budget.printExpenses();
+            System.out.println("Įveskite id: ");
+            int id = Integer.parseInt(scanner.nextLine());
+            System.out.println("Įveskite nauja suma: ");
+            int id2 = Integer.parseInt(scanner.nextLine());
+
+            budget.editExpensesListItem(id, id2);
+
+        } else System.out.println("Nežinoma komanda");
     }
 }

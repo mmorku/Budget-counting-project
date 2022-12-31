@@ -1,34 +1,32 @@
-public class Income {
+import java.util.Objects;
 
-    private int id;
-    private int totalSum;
+public class Income extends List {
+
     private String date;
-    private String category;
-    private String paymentType;
-    private String additionalInfo;
+    private String incomeCategory;
+    private String incomePaymentType;
 
-    public Income(int id, int totalSum, String date, String category, String paymentType, String additionalInfo) {
-        this.id = id;
-        this.totalSum = totalSum;
+    public Income(int id, int totalSum, String additionalInfo, String date, String incomeCategory, String incomePaymentType) {
+        super(id, totalSum, additionalInfo);
         this.date = date;
-        this.category = category;
-        this.paymentType = paymentType;
-        this.additionalInfo = additionalInfo;
+        this.incomeCategory = incomeCategory;
+        this.incomePaymentType = incomePaymentType;
     }
 
-    public int getId() {
-        return id;
+    public Income(String date, String incomeCategory, String incomePaymentType) {
+        this.date = date;
+        this.incomeCategory = incomeCategory;
+        this.incomePaymentType = incomePaymentType;
     }
 
-    public int getTotalSum() {
-        return totalSum;
+    public Income(int id, int totalSum, String additionalInfo) {
+        super(id, totalSum, additionalInfo);
     }
 
-    public void setTotalSum(int totalSum) {
-        this.totalSum = totalSum;
+    public Income() {
     }
 
-    public String getDate() {
+    public Object getDate() {
         return date;
     }
 
@@ -37,38 +35,35 @@ public class Income {
     }
 
     public String getCategory() {
-        return category;
+        return incomeCategory;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setCategory(String incomeCategory) {
+        this.incomeCategory = incomeCategory;
     }
 
     public String getPaymentType() {
-        return paymentType;
+        return incomePaymentType;
     }
 
-    public void setPaymentType(String paymentType) {
-        this.paymentType = paymentType;
-    }
-
-    public String getAdditionalInfo() {
-        return additionalInfo;
-    }
-
-    public void setAdditionalInfo(String additionalInfo) {
-        this.additionalInfo = additionalInfo;
+    public void setPaymentType(String incomePaymentType) {
+        this.incomePaymentType = incomePaymentType;
     }
 
     @Override
     public String toString() {
         return "Income{" +
-                ", id=" + id +
-                ", totalSum=" + totalSum +
-                ", date='" + date + '\'' +
-                ", category='" + category + '\'' +
-                ", paymentType='" + paymentType + '\'' +
-                ", additionalInfo='" + additionalInfo + '\'' +
+                "dateAndTime='" + date + '\'' +
+                ", category='" + incomeCategory + '\'' +
+                ", paymentType='" + incomePaymentType + '\'' +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Income income)) return false;
+        return Objects.equals(date, income.date) && Objects.equals(incomeCategory, income.incomeCategory) && Objects.equals(incomePaymentType, income.incomePaymentType);
+    }
+
 }

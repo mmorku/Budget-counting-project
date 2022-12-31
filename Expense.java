@@ -1,74 +1,69 @@
-public class Expense {
+import java.util.Objects;
 
-    private int id;
-    private int totalSum;
-    private String dateAndTime;
-    private String category;
-    private String paymentType;
-    private String additionalInfo;
+public class Expense extends List {
 
-    public Expense(int id, int totalSum, String dateAndTime, String category, String paymentType, String additionalInfo) {
-        this.id = id;
-        this.totalSum = totalSum;
-        this.dateAndTime = dateAndTime;
-        this.category = category;
-        this.paymentType = paymentType;
-        this.additionalInfo = additionalInfo;
+    private String date;
+    private String expenseCategory;
+    private String expensePaymentType;
+
+    public Expense(int id, int totalSum, String additionalInfo, String date, String expenseCategory, String expensePaymentType) {
+        super(id, totalSum, additionalInfo);
+        this.date = date;
+        this.expenseCategory = expenseCategory;
+        this.expensePaymentType = expensePaymentType;
     }
 
-    public int getId() {
-        return id;
+    public Expense(String date, String expenseCategory, String expensePaymentType) {
+        this.date = date;
+        this.expenseCategory = expenseCategory;
+        this.expensePaymentType = expensePaymentType;
     }
 
-    public int getTotalSum() {
-        return totalSum;
+    public Expense(int id, int totalSum, String additionalInfo) {
+        super(id, totalSum, additionalInfo);
     }
 
-    public void setTotalSum(int totalSum) {
-        this.totalSum = totalSum;
+    public Expense() {
     }
 
-    public String getDateAndTime() {
-        return dateAndTime;
+    public String getDate() {
+        return date;
     }
 
-    public void setDateAndTime(String dateAndTime) {
-        this.dateAndTime = dateAndTime;
+    public void setDate(String date) {
+        this.date = date;
     }
 
-    public String getCategory() {
-        return category;
+    public String getExpenseCategory() {
+        return expenseCategory;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setExpenseCategory(String expenseCategory) {
+        this.expenseCategory = expenseCategory;
     }
 
-    public String getPaymentType() {
-        return paymentType;
+    public String getExpensePaymentType() {
+        return expensePaymentType;
     }
 
-    public void setPaymentType(String paymentType) {
-        this.paymentType = paymentType;
-    }
-
-    public String getAdditionalInfo() {
-        return additionalInfo;
-    }
-
-    public void setAdditionalInfo(String additionalInfo) {
-        this.additionalInfo = additionalInfo;
+    public void setExpensePaymentType(String expensePaymentType) {
+        this.expensePaymentType = expensePaymentType;
     }
 
     @Override
     public String toString() {
         return "Expense{" +
-                ", id=" + id +
-                ", totalSum=" + totalSum +
-                ", dateAndTime='" + dateAndTime + '\'' +
-                ", category='" + category + '\'' +
-                ", paymentType='" + paymentType + '\'' +
-                ", additionalInfo='" + additionalInfo + '\'' +
+                "date='" + date + '\'' +
+                ", category='" + expenseCategory + '\'' +
+                ", paymentType='" + expensePaymentType + '\'' +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Expense expense)) return false;
+        return Objects.equals(date, expense.date) && Objects.equals(expenseCategory, expense.expenseCategory) && Objects.equals(expensePaymentType, expense.expensePaymentType);
+    }
+
 }
