@@ -1,7 +1,14 @@
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Program {
-    public static void main(String[] args) {
+    public Program() throws IOException {
+    }
+
+    public static void main(String[] args) throws IOException {
 
         Budget budget = new Budget();
         Scanner scanner = new Scanner(System.in);
@@ -20,6 +27,8 @@ public class Program {
                 case "3" -> budget.getTotalBalance();
                 case "de" -> enterTheId(scanner, budget);
                 case "di" -> enterTheId2(scanner, budget);
+                case "5" -> Failas.saveToFileBufferedWriter(budget.toString(), budget.toString());
+                case "6" -> Failas.getDataFromFileBufferedReader(new File(budget.toString()));
                 case "edit" -> editSomethingInTheList(scanner, budget);
                 case "x" -> runprogram = false;
                 default -> System.out.println("Nežinoma komanda");
@@ -39,9 +48,10 @@ public class Program {
                                 
                 [10] - Atspausdinti pajamų sąrašą;
                 [20] - Atspausdinti išlaidų sąrašą;
-                                
                 [de] - Ištrinti išlaidų įrašą;
                 [di] - Ištrinti pajamų įrašą;
+                [5] - Išsaugoti duomenis į failą;
+                [6] - Gauti duomenis iš failo;
                 [edit] - Redaguoti įrašą;
                 [x] - Baigti;
                 """);
@@ -66,6 +76,7 @@ public class Program {
                 [2] - Įvesti išlaidas;
                 """);
         int id = Integer.parseInt(scanner.nextLine());
+
         if (id == 1) {
 //            Program.enterTheIncome(scanner, budget);
 

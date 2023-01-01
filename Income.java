@@ -66,4 +66,7 @@ public class Income extends List {
         return Objects.equals(date, income.date) && Objects.equals(incomeCategory, income.incomeCategory) && Objects.equals(incomePaymentType, income.incomePaymentType);
     }
 
+    public String getCsvValue(){
+        return String.format("%s\n", "%s\n", "%s\n", "%s\n", "%s\n", "%s\n", this.getId(), this.getTotalSum(), this.getAdditionalInfo(), this.date, this.incomeCategory, this.incomePaymentType);
+    }
 }
