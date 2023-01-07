@@ -2,7 +2,7 @@ import java.io.*;
 
 public class Failas {
 
-    public static String getDataFromFileBufferedReader(File file) {
+    public static String getDataFromFile(File file) {
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             StringBuilder result = new StringBuilder();
             String line = null;
@@ -24,11 +24,18 @@ public class Failas {
         return null;
     }
 
-    public static void saveToFileBufferedWriter(String content, String filepath) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(filepath, true))) {
-            bw.write(content);
+    public static void saveToFile(Budget budget) throws IOException {
+        File file = new File("data.csv");
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(file, true))) {
+            for (Income income : budget.getIncomes()) {
+                bw.write(income.getCsvValue() + "\n");
+            }
+            for (Expense expense : budget.getExpenses()) {
+                bw.write(expense.getCsvValue() + "\n");
+            }
         } catch (Exception e) {
             System.out.println(e);
         }
+
     }
 }

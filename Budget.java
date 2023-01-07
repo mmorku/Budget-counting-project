@@ -1,16 +1,15 @@
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Budget {
     private List<Income> incomes = new ArrayList<>();
     private List<Expense> expenses = new ArrayList<>();
-
-    private int sumOfIncomeList = 0;
-    private int sumOfExpensesList = 0;
-
+    public List<Income> getIncomes(){
+        return incomes;
+    }
+    public List<Expense> getExpenses(){
+        return expenses;
+    }
     public void addIncomeToList(Income income) {
         incomes.add(income);
         System.out.println(incomes.toString());
@@ -20,7 +19,6 @@ public class Budget {
         expenses.add(expense);
         System.out.println(expenses.toString());
     }
-
     public double getSumOfAllIncomes() {
         if (incomes.size() == 0) {
             throw new RuntimeException("Ne");
@@ -76,33 +74,35 @@ public class Budget {
 
     }
 
-    public void deleteExpense(int id) {
+    public void deleteExpense(int id) throws Exception {
         Expense filteredExpense = expenses
                 .stream()
-                .filter(expense -> expense.getId() == id).findAny().orElse(null);
+                .filter(expense -> expense.getId() == id).findAny().orElseThrow(() -> new Exception(String.format("Could not found expense with this id %s", id)));
         expenses.remove(filteredExpense);
     }
 
-    public void deleteIncome(int id) {
+    public void deleteIncome(int id) throws Exception {
         Income filteredIncome = incomes
                 .stream()
-                .filter(income -> income.getId() == id).findAny().orElse(null);
+                .filter(income -> income.getId() == id).findAny().orElseThrow(() -> new Exception(String.format("Could not found income with this id %s", id)));
         incomes.remove(filteredIncome);
     }
 
-    public void editExpensesListItem (int id, int id2) {
+    // editExpense
+    public void editExpensesListItem (int id, int suma) throws Exception {
         Expense filteredExpense = expenses
                 .stream()
-                .filter(expense -> expense.getId() == id).findAny().orElse(null);
-        filteredExpense.setTotalSum(id2);
+                .filter(expense -> expense.getId() == id).findAny().orElseThrow(() -> new Exception(String.format("Could not found expense with this id %s", id)));
+        filteredExpense.setTotalSum(suma);
         printExpenses();
     }
 
-    public void editIncomesListItem (int id, int id2) {
+    //editIncome
+    public void editIncomesListItem (int editId, int newSum) {
         Income filteredIncome = incomes
                 .stream()
-                .filter(income -> income.getId() == id).findAny().orElse(null);
-        filteredIncome.setTotalSum(id2);
+                .filter(income -> income.getId() == editId).findAny().orElse(null);
+        filteredIncome.setTotalSum(newSum);
         printIncomes();
     }
 }

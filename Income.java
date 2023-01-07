@@ -1,6 +1,6 @@
 import java.util.Objects;
 
-public class Income extends List {
+public class Income extends Account {
 
     private String date;
     private String incomeCategory;
@@ -13,49 +13,24 @@ public class Income extends List {
         this.incomePaymentType = incomePaymentType;
     }
 
-    public Income(String date, String incomeCategory, String incomePaymentType) {
-        this.date = date;
-        this.incomeCategory = incomeCategory;
-        this.incomePaymentType = incomePaymentType;
-    }
-
-    public Income(int id, int totalSum, String additionalInfo) {
-        super(id, totalSum, additionalInfo);
-    }
-
-    public Income() {
-    }
-
     public Object getDate() {
         return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
     }
 
     public String getCategory() {
         return incomeCategory;
     }
 
-    public void setCategory(String incomeCategory) {
-        this.incomeCategory = incomeCategory;
-    }
-
     public String getPaymentType() {
         return incomePaymentType;
-    }
-
-    public void setPaymentType(String incomePaymentType) {
-        this.incomePaymentType = incomePaymentType;
     }
 
     @Override
     public String toString() {
         return "Income{" +
-                "dateAndTime='" + date + '\'' +
-                ", category='" + incomeCategory + '\'' +
-                ", paymentType='" + incomePaymentType + '\'' +
+                "date='" + date + '\'' +
+                ", incomeCategory='" + incomeCategory + '\'' +
+                ", incomePaymentType='" + incomePaymentType + '\'' +
                 '}';
     }
 
@@ -67,6 +42,6 @@ public class Income extends List {
     }
 
     public String getCsvValue(){
-        return String.format("%s\n", "%s\n", "%s\n", "%s\n", "%s\n", "%s\n", this.getId(), this.getTotalSum(), this.getAdditionalInfo(), this.date, this.incomeCategory, this.incomePaymentType);
+        return String.format("%s, %s, %s, %s, %s, %s", this.getId(), this.getTotalSum(), this.getAdditionalInfo(), this.date, this.incomeCategory, this.incomePaymentType);
     }
 }

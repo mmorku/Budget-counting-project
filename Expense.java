@@ -1,6 +1,6 @@
 import java.util.Objects;
 
-public class Expense extends List {
+public class Expense extends Account {
 
     private String date;
     private String expenseCategory;
@@ -13,41 +13,16 @@ public class Expense extends List {
         this.expensePaymentType = expensePaymentType;
     }
 
-    public Expense(String date, String expenseCategory, String expensePaymentType) {
-        this.date = date;
-        this.expenseCategory = expenseCategory;
-        this.expensePaymentType = expensePaymentType;
-    }
-
-    public Expense(int id, int totalSum, String additionalInfo) {
-        super(id, totalSum, additionalInfo);
-    }
-
-    public Expense() {
-    }
-
     public String getDate() {
         return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
     }
 
     public String getExpenseCategory() {
         return expenseCategory;
     }
 
-    public void setExpenseCategory(String expenseCategory) {
-        this.expenseCategory = expenseCategory;
-    }
-
     public String getExpensePaymentType() {
         return expensePaymentType;
-    }
-
-    public void setExpensePaymentType(String expensePaymentType) {
-        this.expensePaymentType = expensePaymentType;
     }
 
     @Override
@@ -67,6 +42,6 @@ public class Expense extends List {
     }
 
     public String getCsvValue(){
-        return String.format("%s\n", "%s\n", "%s\n", "%s\n", "%s\n", "%s\n", this.getId(), this.getTotalSum(), this.getAdditionalInfo(), this.date, this.expenseCategory, this.expensePaymentType);
+        return String.format("%s, %s, %s, %s, %s, %s", this.getId(), this.getTotalSum(), this.getAdditionalInfo(), this.date, this.expenseCategory, this.expensePaymentType);
     }
 }
